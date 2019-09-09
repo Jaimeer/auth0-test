@@ -1,0 +1,11 @@
+{
+  "domain": "xxxx.eu.auth0.com",
+  "audience": "https://xxxx.eu.auth0.com/api/v2/",
+  "front": {
+    "clientId": "xxxx"
+  },
+  "back": {
+    "clientId": "xxxx",
+    "clientSecret": "xxxxx"
+  }
+}
