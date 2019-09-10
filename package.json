@@ -4,5 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "cd front;yarn serve"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
   }
 }

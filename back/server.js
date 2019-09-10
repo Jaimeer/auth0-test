@@ -53,6 +53,18 @@ app.get('/api/external2', checkJwt, async (req, res) => {
   })
 })
 
+app.put('/api/user', checkJwt, async (req, res) => {
+  console.log('GET /api/user')
+  const user = req.user
+  const body = req.body
+  console.log({ user, body })
+  try {
+    res.send(await authService.updateUser(user, body))
+  } catch (err) {
+    res.send(err.message)
+  }
+})
+
 app.get('/api/test', (req, res) => {
   console.log('GET /api/test')
   res.send({

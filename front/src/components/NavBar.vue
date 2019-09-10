@@ -15,6 +15,9 @@
         <router-link to="/profile">Profile</router-link>
       </li>
       <li v-if="isAuthenticated">
+        <router-link to="/edit">Edit</router-link>
+      </li>
+      <li v-if="isAuthenticated">
         <router-link to="/external-api">External API</router-link>
       </li>
       <li v-if="isAuthenticated">

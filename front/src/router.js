@@ -4,6 +4,7 @@ import auth from './auth/authService'
 import Callback from './views/Callback'
 import Home from './views/Home'
 import Profile from './views/Profile.vue'
+import Edit from './views/Edit.vue'
 import ExternalApiView from './views/ExternalApi.vue'
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Profile,
+  },
+  {
+    path: '/edit',
+    name: 'edit',
+    component: Edit,
   },
   {
     path: '/external-api',

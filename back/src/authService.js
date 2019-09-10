@@ -35,14 +35,15 @@ const getToken = () => {
     })
   })
 }
-const getUserFromUserId = (bearer, userId) => {
-  console.log('getUserFromUserId', { bearer, userId })
+const getUserFromUserIdPromise = (bearer, userId) => {
+  console.log('getUserFromUserId')
   return new Promise((resolve, reject) => {
     var options = {
       method: 'GET',
       url: `https://${authConfig.domain}/api/v2/users/${userId}`,
       headers: { authorization: bearer },
     }
+    console.log('getUserFromUserIdPromise', options)
     request(options, function(error, response, body) {
       if (error) return reject(error)
       console.log('BODY', body)
@@ -58,7 +59,38 @@ const getUserWithoutBearer = async user => {
     token = JSON.parse(token)
     const userId = user.sub
     const bearer = `${token.token_type} ${token.access_token}`
-    return getUserFromUserId(bearer, userId)
+    return getUserFromUserIdPromise(bearer, userId)
+  }
+  return { status: 'No Token' }
+}
+
+const updateUserPromise = async (bearer, userId, body) => {
+  console.log('updateUserPromise')
+  const data = { user_metadata: body }
+  return new Promise((resolve, reject) => {
+    var options = {
+      method: 'PATCH',
+      url: `https://${authConfig.domain}/api/v2/users/${userId}`,
+      headers: { authorization: bearer },
+      json: data,
+    }
+    console.log('updateUserPromise', options)
+    request(options, function(error, response, body) {
+      if (error) return reject(error)
+      console.log('BODY', body)
+      resolve(body)
+    })
+  })
+}
+
+const updateUser = async (user, body) => {
+  let token = await getToken()
+  console.log('updateUser', { token })
+  if (token) {
+    token = JSON.parse(token)
+    const userId = user.sub
+    const bearer = `${token.token_type} ${token.access_token}`
+    return updateUserPromise(bearer, userId, body)
   }
   return { status: 'No Token' }
 }
@@ -66,4 +98,5 @@ const getUserWithoutBearer = async user => {
 module.exports = {
   getUserWithoutBearer,
   getUserFromBearer,
+  updateUser,
 }

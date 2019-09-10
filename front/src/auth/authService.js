@@ -11,7 +11,7 @@ const webAuth = new auth0.WebAuth({
   clientID: authConfig.front.clientId,
   audience: authConfig.audience,
   responseType: 'token id_token',
-  scope: 'openid profile email',
+  scope: 'openid profile email user_metadata',
 })
 
 class AuthService extends EventEmitter {
